@@ -2,20 +2,134 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@font-face {
+  font-family: "Interceptor";
+  src: local("Interceptor"), url("/fonts/Interceptor.otf") format("opentype");
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@font-face {
+  font-family: "Interceptor-Bold";
+  src: local("Interceptor-Bold"), url("/fonts/InterceptorBold.otf") format("opentype");
+}
+
+body, html {
+  background: #1D1E1D;
+  font-family: "Interceptor", sans-serif;
+}
+
+.bg-div {
+  background: radial-gradient(circle, #dc83ff 30%, #820ae4 70%);
+  background: opacity(0.9);
+}
+.card{
+  height: 100%;
+  width: 100%;
+  background: #4F3B79;
+  display: flex;
+  position: absolute;
+  place-content: center;
+  overflow: hidden;
+  opacity: 0.7;
+}
+.card::before {
+  content:'';
+  position: absolute;
+  width: 8%;
+  background-image: linear-gradient(45deg, #4F3B79, #7154ad, #7154ad, #EEAC73, #a0389b, #8a3185);
+  height: 5%; 
+  bottom: 0;
+  transform: skewX(-30deg);
+  animation: rotBGimg 1s linear infinite;
+  transition: all 0.2s linear;
+  border-radius: 20px;
+}
+.card::after {
+  content: "";
+  position: absolute;
+  background-image: linear-gradient(60deg,#2D1554, #2D1554, #8a3185, #2D1554 );
+  width: 100%;
+  height: 95%;
+  margin-top: 0px;
+}
+@keyframes rotBGimg {
+  from {
+    transform: translateX(-800%);
+  }
+  to {
+    transform: translateX(600%);
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+.unselectable {
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+.toggleShadowLeft {
+  box-shadow: inset 4px -6px 6px -2px black;
+}
+
+.toggleShadowRight {
+  box-shadow: inset -4px -6px 6px -2px black;
+}
+
+.toggleMenuBorder {
+  border-top: 1px solid #202d4a;
+  border-bottom: 1px solid #000000;
+}
+.toggleMn {
+  display: block;
+  margin-right: -100%;
+  transition: margin 0.5s ease-in-out;
+}
+
+#check:checked ~ .toggleMn{
+  display: block;
+  margin-right: 0;
+}
+
+#check:checked ~ .toggleLyt{
+  animation: fadeInBlack 0.5s ease-in-out;
+  display: block;
+}
+
+#check:not(:checked) ~ .toggleLyt{
+  animation: fadeOffBlack 0.5s ease-in-out;
+  display: none;
+}
+
+@keyframes fadeInBlack {
+    0% {
+        display: none;
+        opacity: 0;
+    }
+
+    1% {
+        display: block;
+        opacity: 0;
+    }
+
+    100% {
+        display: block;
+        opacity: 0.5;
+    }
+}
+
+@keyframes fadeOffBlack {
+    0% {
+        display: block;
+        opacity: 0.5;
+    }
+
+    1% {
+        display: block;
+        opacity: 0.5;
+    }
+
+    100% {
+        display: none;
+        opacity: 0;
+    }
 }
